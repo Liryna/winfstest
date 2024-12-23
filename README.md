@@ -4,7 +4,7 @@ Windows file system testing. Inspired by the FreeBSD fstest, but written from sc
 Based from work of Bill Zissimopoulos, https://bitbucket.org/billziss/secfs.test
 
 Prerequisites:
-* Visual Studio (prepared in VS 2015)
+* Visual Studio (prepared in VS 2022)
 * Windows 10 SDK 
 * Python 2.7
 
