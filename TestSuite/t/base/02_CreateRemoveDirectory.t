@@ -26,7 +26,26 @@ expect("RemoveDirectory %s" % name, "ERROR_DIR_NOT_EMPTY")
 expect("DeleteFile %s\\inner_file" % name, 0)
 expect("RemoveDirectory %s" % name, 0)
 
+# test deletion of read-only directory
+expect("CreateDirectory %s 0" % name, 0)
+expect("SetFileAttributes %s FILE_ATTRIBUTE_READONLY" % name, 0)
+expect("RemoveDirectory %s" % name, "ERROR_ACCESS_DENIED")
+expect("SetFileAttributes %s FILE_ATTRIBUTE_NORMAL" % name, 0)
+expect("RemoveDirectory %s" % name, 0)
+
 # test creating a directory with a non-existing parent
 expect("CreateDirectory %s\\bar 0" % name, "ERROR_PATH_NOT_FOUND")
+
+# test attributes setting
+expect("CreateDirectory %s 0" % name, 0)
+expect("GetFileInformation %s" % name, lambda r: r[0]["FileAttributes"] == 0x10)
+expect("SetFileAttributes %s FILE_ATTRIBUTE_READONLY" % name, 0)
+expect("GetFileInformation %s" % name, lambda r: r[0]["FileAttributes"] == 0x11)
+expect("SetFileAttributes %s FILE_ATTRIBUTE_SYSTEM" % name, 0)
+expect("GetFileInformation %s" % name, lambda r: r[0]["FileAttributes"] == 0x14)
+expect("SetFileAttributes %s FILE_ATTRIBUTE_HIDDEN" % name, 0)
+expect("GetFileInformation %s" % name, lambda r: r[0]["FileAttributes"] == 0x12)
+expect("SetFileAttributes %s FILE_ATTRIBUTE_NORMAL" % name, 0)
+expect("RemoveDirectory %s" % name, 0)
 
 testdone()
