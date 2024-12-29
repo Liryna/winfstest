@@ -4,7 +4,7 @@ Windows file system testing. Inspired by the FreeBSD fstest, but written from sc
 Based from work of Bill Zissimopoulos, https://bitbucket.org/billziss/secfs.test
 
 Prerequisites:
-* Visual Studio (prepared in VS 2015)
+* Visual Studio (prepared in VS 2019)
 * Windows 10 SDK 
 * Python 2.7
 
@@ -12,6 +12,6 @@ To run:
 * Build the winfstest.exe with VS
 * cd TestSuite
 * run-winfstest.bat - if python not found, u probably need to edit HKCU to HKLM (machine vs per user Python install)
-* U shoud see test done 171/171 
+* U should see test done 568/568 
 
 To test another location give a path as first argument: run-winfstest.bat . X:\tmp

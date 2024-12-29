@@ -10,6 +10,8 @@ name = uniqname()
 expect("CreateDirectory %s:foo 0" % name, "ERROR_DIRECTORY")
 expect("CreateDirectory %s 0" % name, 0)
 expect("CreateDirectory %s 0" % name, "ERROR_ALREADY_EXISTS")
+expect("CreateDirectory %s::$INDEX_ALLOCATION 0" % name, "ERROR_ALREADY_EXISTS")
+expect("CreateDirectory %s:$I30:$INDEX_ALLOCATION 0" % name, "ERROR_ALREADY_EXISTS")
 expect("CreateFile %s:foo GENERIC_WRITE 0 0 CREATE_NEW FILE_ATTRIBUTE_NORMAL 0" % name, 0)
 expect("CreateFile %s:foo GENERIC_WRITE 0 0 CREATE_NEW FILE_ATTRIBUTE_NORMAL 0" % name, "ERROR_FILE_EXISTS")
 e, r = expect("GetFileInformation %s"% name, 0)
@@ -20,6 +22,18 @@ expect("DeleteFile %s:foo" % name, 0)
 expect("DeleteFile %s:foo" % name, "ERROR_FILE_NOT_FOUND")
 expect("RemoveDirectory %s" % name, 0)
 expect("RemoveDirectory %s" % name, "ERROR_FILE_NOT_FOUND")
+
+# test creating a directory with default type '::$INDEX_ALLOCATION'
+expect("CreateDirectory %s::$INDEX_ALLOCATION 0" % name, 0)
+expect("CreateDirectory %s 0" % name, "ERROR_ALREADY_EXISTS")
+expect("CreateDirectory %s:$I30:$INDEX_ALLOCATION 0" % name, "ERROR_ALREADY_EXISTS")
+expect("RemoveDirectory %s" % name, 0)
+
+# test creating a directory with default type ':$I30:$INDEX_ALLOCATION'
+expect("CreateDirectory %s:$I30:$INDEX_ALLOCATION 0" % name, 0)
+expect("CreateDirectory %s 0" % name, "ERROR_ALREADY_EXISTS")
+expect("CreateDirectory %s::$INDEX_ALLOCATION 0" % name, "ERROR_ALREADY_EXISTS")
+expect("RemoveDirectory %s" % name, 0)
 
 expect("CreateDirectory %s 0" % name, 0)
 expect("CreateFile %s:foo:$DATA GENERIC_WRITE 0 0 CREATE_NEW FILE_ATTRIBUTE_NORMAL 0" % name, 0)
