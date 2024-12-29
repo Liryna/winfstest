@@ -12,6 +12,6 @@ To run:
 * Build the winfstest.exe with VS
 * cd TestSuite
 * run-winfstest.bat - if python not found, u probably need to edit HKCU to HKLM (machine vs per user Python install)
-* U should see test done 558/558 
+* U should see test done 568/568 
 
 To test another location give a path as first argument: run-winfstest.bat . X:\tmp
