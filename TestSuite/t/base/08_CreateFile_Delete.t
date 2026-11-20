@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 # STATUS_DELETE_PENDING
 # FindFiles with delete pending

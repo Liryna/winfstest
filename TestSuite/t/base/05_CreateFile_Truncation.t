@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 # SetEndOfFile
 # truncation behavior for TRUNCATE_EXISTING, OPEN_ALWAYS, CREATE_ALWAYS, OPEN_EXISTING
